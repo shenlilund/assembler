@@ -76,8 +76,7 @@ int main(int argc, char* argv[])
 		}
 
 		if (!words.empty())
-		{
-			
+		{			
 			bool label = true;
 			for (int j = 0; j < instructions.size(); j++)
 			{
@@ -86,7 +85,7 @@ int main(int argc, char* argv[])
 					label = false;
 				}
 			}
-			if (label == true && !(symbolTable.find(words[0]) == symbolTable.end()))
+			if (label == true && symbolTable.find(words[0]) == symbolTable.end())
 			{
 				symbolTable[words[0]] = address;
 			}
@@ -102,6 +101,9 @@ int main(int argc, char* argv[])
 	infile.close();
 	infile.open(argv[1]);
 
+	// cout << "HI" << endl;
+	// cout << symbolTable["SECOND"] << endl;
+
 	 address = 0;
 	//second pass
 	while (getline(infile, line))
@@ -112,7 +114,14 @@ int main(int argc, char* argv[])
 		{
 			if (word[0] == ';')
 				break;
-			words.push_back(word);
+			bool label = true;
+			for (int i = 0; i < instructions.size(); i++)
+			{
+				if (instructions[i] == word)
+					label = false;
+			}
+			if (label = false)
+				words.push_back(word);
 		}
 		if (!words.empty())
 		{
@@ -120,15 +129,22 @@ int main(int argc, char* argv[])
 			{
 				if (instructions[j] ==  words[0])
 				{
-					mem[address] = instructions[j];
+					int* ptr = static_cast<int*>(static_cast<void*>(&mem[address]));
+					*ptr = j;
+					if (words[0] == "JMP")
+					{
+						*(ptr+1) = symbolTable[words[0]];
+					}
+
 				}
-			}	
+			}
 		}
 
 		// for (int i = 0; i < words.size(); i++)
 		// {
 		// 	cout << words[i] << endl;
 		// }
+
 		address+=INSTRSIZE; 
 	}
 
