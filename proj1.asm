@@ -1,0 +1,234 @@
+;1) Print your name on the screen.
+LDR R7 NAME1
+TRP 3
+LDR R7 NAME2
+TRP 3
+LDR R7 NAME3
+TRP 3
+LDR R7 NAME4
+TRP 3
+LDR R7 COMMA
+TRP 3
+LDR R7 SPACE
+TRP 3
+LDR R7 NAME5
+TRP 3
+LDR R7 NAME6
+TRP 3
+LDR R7 NAME7
+TRP 3
+LDR R7 NAME8
+TRP 3
+LDR R7 NAME9
+TRP 3
+LDR R7 NAME10
+TRP 3
+;2) Print a blank line.
+LDR R7 NEWLINE
+TRP 3
+;3) Add all the elements of list B together; print each result (intermediate and final) on screen.  Put 2 spaces between each result. <- pay attention to this (e.g., 450) <-pay attention to this
+LDR R0 B1
+LDR R1 B2
+ADD R0 R1
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3 
+TRP 3
+LDR R1 B3
+ADD R0 R3
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3 
+TRP 3
+LDR R1 B4
+ADD R0 B4
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3 
+TRP 3
+LDR R1 B5
+ADD R0 B5
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3 
+TRP 3
+LDR R1 B6
+ADD R0 B6
+MOV R7 R0
+TRP 1
+MOV R3 R7
+;4) Print a blank line. <- pay attention to this
+LDR R7 NEWLINE
+TRP 3
+;5) Multiply all the elements of list A together; print each result (intermediate and final) on screen. Put 2 spaces between each result. (e.g., 2)
+LDR R0 A1
+LDR R1 A2
+MUL R0 R1
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3
+TRP 3
+LDR R1 A3
+MUL R0 R1
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3
+TRP 3
+LDR R1 A4
+MUL R0 R1
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3
+TRP 3
+LDR R1 A5
+MUL R0 R1
+MOV R7 R0
+TRP 1
+MOV R0 R7
+LDR R7 SPACE
+TRP 3
+TRP 3
+LDR R1 A6
+MUL R0 R1
+MOV R7 R0
+TRP 1
+MOV R4 R7
+;6) Print a blank line.
+LDR R7 NEWLINE
+TRP 3
+;7) Divide the final result from part 3, by each element in list B (the results are not cumulative). Put 2 spaces between each result. (e.g., 1)
+SUB R0 R0
+ADD R0 R3
+LDR R1 B1
+DIV R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R3
+LDR R1 B2
+DIV R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R3
+LDR R1 B3
+DIV R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R3
+LDR R1 B4
+DIV R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R3
+LDR R1 B5
+DIV R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R3
+LDR R1 B6
+DIV R0 R1
+MOV R7 R0
+TRP 1
+;8) Print a blank line.
+LDR R7 NEWLINE
+TRP 3
+;9) Subtract from the final result of part 5 each element of list C (the results are not cumulative). Put 2 spaces between each result. (e.g., 220)
+SUB R0 R0
+ADD R0 R4
+LDR R1 C1
+SUB R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R4
+LDR R1 C2
+SUB R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R4
+LDR R1 C3
+SUB R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+SUB R0 R0
+ADD R0 R4
+LDR R1 C4
+SUB R0 R1
+MOV R7 R0
+TRP 1
+LDR R7 SPACE
+TRP 3
+TRP 3
+; Data
+NEWLINE .BYT '\n'
+SPACE .BYT ' '
+COMMA .BYT ','
+A1 .INT 1
+A2 .INT 2
+A3 .INT 3
+A4 .INT 4
+A5 .INT 5
+A6 .INT 6
+B1 .INT 300
+B2 .INT 150
+B3 .INT 50
+B4 .INT 20
+B5 .INT 10
+B6 .INT 5
+C1 .INT 500
+C2 .INT 2
+C3 .INT 5
+C4 .INT 10
+NAME1 .BYT 'L'
+NAME2. BYT 'u'
+NAME3 .BYT 'n'
+NAME4 .BYT 'd'
+NAME5 .BYT 'S'
+NAME6 .BYT 'h'
+NAME7 .BYT 'e'
+NAME8 .BYT 'n'
+NAME9 .BYT 'l'
+NAME10 .BYT 'i'
