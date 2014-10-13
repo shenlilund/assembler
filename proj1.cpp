@@ -147,10 +147,10 @@ int main(int argc, char* argv[])
 			}
 			
 		}
-		for (int i = 0; i < words.size(); i++)
-		{
-			cout << words[i] << endl;
-		}	
+		// for (int i = 0; i < words.size(); i++)
+		// {
+		// 	cout << words[i] << endl;
+		// }	
 		if (!words.empty())
 		{
 			for (int j = 0; j < instructions.size(); j++)
@@ -161,11 +161,29 @@ int main(int argc, char* argv[])
 					*ptr = j;
 					if (words[0] == "JMP")
 					{
-						*(ptr+1) = symbolTable[words[0]];
+						*(ptr+1) = symbolTable[words[1]];
 					}
 					else if (words[0] == "JMR")
 					{
-						
+						int temp;
+						temp = words[1][1] - '0';
+						*(ptr+1) = temp;
+					}
+					else if (words[0] == "BNZ" || words[0] == "BGT" || words[0] == "BLT" || words[0] == "BRZ" || words[0] == "LDA" || words[0] == "STR" || words[0] == "LDR" || words[0] == "STB" || words[0] == "LDB")
+					{
+						int temp;
+						temp = words[1][1] - '0';
+						*(ptr+1) = temp;
+						*(ptr+2) = symbolTable[words[2]];
+					}
+					else if (words[0] == "MOV" || words[0] == "ADD" || words[0] == "SUB" || words[0] == "MUL" || words[0] == "DIV" || words[0] == "AND" || words[0] == "OR" || words[0] == "CMP")
+					{
+						int temp;
+						temp = words[1][1] - '0';
+						int temp1;
+						temp1 = words[2][1] - '0';
+						*(ptr+1) = temp;
+						*(ptr+2) = temp1;
 					}
 				}
 			}
@@ -173,5 +191,10 @@ int main(int argc, char* argv[])
 
 		address+=INSTRSIZE; 
 	}
+
+	int* ptr1 = static_cast<int*>(static_cast<void*>(&mem[36]));
+	cout << *ptr1 << endl;
+	cout << *(ptr1+1) << endl;
+	cout << *(ptr1+2) << endl;
 
 }
