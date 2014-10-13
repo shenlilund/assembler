@@ -110,19 +110,47 @@ int main(int argc, char* argv[])
 	{
 		vector<string> words;
 		istringstream iss(line);
+		bool first = true;
 		while (iss >> word)
 		{
-			if (word[0] == ';')
-				break;
-			bool label = true;
-			for (int i = 0; i < instructions.size(); i++)
+			if (word == "'")
 			{
-				if (instructions[i] == word)
-					label = false;
+				char temp = iss.get();
+				string tempStr;
+				tempStr = temp;
+				words.push_back(tempStr);
+				break;
 			}
-			if (label = false)
-				words.push_back(word);
+			else if (word[0] == '\'')
+			{
+				string temp;
+				temp = word[1];
+				words.push_back(temp);
+			}
+			else
+			{
+				if (word[0] == ';')
+					break;
+				bool label = true;
+				for (int i = 0; i < instructions.size(); i++)
+				{
+					if (instructions[i] == word)
+					{
+						label = false;
+					}
+				}
+				if (label == false || first == false)
+				{
+					words.push_back(word);
+					first = false;
+				}
+			}
+			
 		}
+		for (int i = 0; i < words.size(); i++)
+		{
+			cout << words[i] << endl;
+		}	
 		if (!words.empty())
 		{
 			for (int j = 0; j < instructions.size(); j++)
@@ -135,15 +163,13 @@ int main(int argc, char* argv[])
 					{
 						*(ptr+1) = symbolTable[words[0]];
 					}
-
+					else if (words[0] == "JMR")
+					{
+						
+					}
 				}
 			}
 		}
-
-		// for (int i = 0; i < words.size(); i++)
-		// {
-		// 	cout << words[i] << endl;
-		// }
 
 		address+=INSTRSIZE; 
 	}
