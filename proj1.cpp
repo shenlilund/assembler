@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -158,17 +159,38 @@ int main(int argc, char* argv[])
 				if (instructions[j] ==  words[0])
 				{
 					int* ptr = static_cast<int*>(static_cast<void*>(&mem[address]));
-					*ptr = j;
+					if (words[0] == ".INT")
+					{
+						string temp;
+						temp = words[1];
+						int temp1 = atoi(temp.c_str());
+						*ptr = temp1;	
+					}
+					else if (words[0] == ".BYT")
+					{
+						string temp;
+						temp = words[1];
+						char temp1 = temp[0];
+						mem[address] = temp1;
+					}
+					else
+					{
+						*ptr = j;
+					}
+
+					// label
 					if (words[0] == "JMP")
 					{
 						*(ptr+1) = symbolTable[words[1]];
 					}
+					// register
 					else if (words[0] == "JMR")
 					{
 						int temp;
 						temp = words[1][1] - '0';
 						*(ptr+1) = temp;
 					}
+					// register, label
 					else if (words[0] == "BNZ" || words[0] == "BGT" || words[0] == "BLT" || words[0] == "BRZ" || words[0] == "LDA" || words[0] == "STR" || words[0] == "LDR" || words[0] == "STB" || words[0] == "LDB")
 					{
 						int temp;
@@ -176,6 +198,7 @@ int main(int argc, char* argv[])
 						*(ptr+1) = temp;
 						*(ptr+2) = symbolTable[words[2]];
 					}
+					// register, register
 					else if (words[0] == "MOV" || words[0] == "ADD" || words[0] == "SUB" || words[0] == "MUL" || words[0] == "DIV" || words[0] == "AND" || words[0] == "OR" || words[0] == "CMP")
 					{
 						int temp;
@@ -185,6 +208,24 @@ int main(int argc, char* argv[])
 						*(ptr+1) = temp;
 						*(ptr+2) = temp1;
 					}
+					// register, immediate
+					else if (words[0] == "ADI")
+					{
+						int temp;
+						temp = words[1][1] - '0';
+						string temp1;
+						temp1 = words[2].erase(0,1);
+						int temp2 = atoi(temp1.c_str());
+						*(ptr+1) = temp;
+						*(ptr+2) = temp2;
+					}
+					else if (words[0] == "TRP")
+					{
+						string temp;
+						temp = words[1];
+						int temp1 = atoi(temp.c_str());
+						*(ptr+1) = temp1;
+					}
 				}
 			}
 		}
@@ -192,9 +233,10 @@ int main(int argc, char* argv[])
 		address+=INSTRSIZE; 
 	}
 
-	int* ptr1 = static_cast<int*>(static_cast<void*>(&mem[36]));
-	cout << *ptr1 << endl;
-	cout << *(ptr1+1) << endl;
-	cout << *(ptr1+2) << endl;
+	// cout << mem[36] << endl;
+	// int* ptr1 = static_cast<int*>(static_cast<void*>(&mem[36]));
+	// cout << *ptr1 << endl;
+	// cout << *(ptr1+1) << endl;
+	// cout << *(ptr1+2) << endl;
 
 }
