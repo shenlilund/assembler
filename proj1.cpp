@@ -179,8 +179,9 @@ int main(int argc, char* argv[])
 		}
 		// for (int i = 0; i < words.size(); i++)
 		// {
-		// 	cout << words[i] << endl;
+		// 	cout << words[i] << " ";
 		// }	
+		// cout << endl;
 		if (!words.empty())
 		{
 			for (int j = 0; j < instructions.size(); j++)
@@ -198,7 +199,7 @@ int main(int argc, char* argv[])
 					}
 					else if (words[0] == ".BYT")
 					{
-						if (words[0] == "\n")
+						if (words[1] == "\\n")
 						{
 							string temp;
 							temp = words[1];
@@ -219,7 +220,6 @@ int main(int argc, char* argv[])
 					{
 						*ptr = j;
 					}
-
 					// label
 					if (words[0] == "JMP")
 					{
@@ -301,7 +301,7 @@ int main(int argc, char* argv[])
 	
 	}
 
-	// cout << mem[36] << endl;
+	// cout << mem[37] << endl;
 	// int* ptr2 = static_cast<int*>(static_cast<void*>(&mem[60]));
 	// cout << *ptr2 << endl;
 	// cout << *(ptr2+1) << endl;
@@ -331,7 +331,20 @@ int main(int argc, char* argv[])
 				else if (*(ptrPC+1) == 3)
 				{
 					char* charPtr = static_cast<char*>(static_cast<void*>(&reg[7]));
-					cout << *charPtr;
+					
+					if (*charPtr == '\\' && (*(charPtr+1)) == 'n')
+					{
+						cout << '\n';
+						// cout << endl;
+						// string temp;	
+						// temp = *charPtr;
+						// temp+=*(charPtr+1);
+						// cout << temp;
+					}
+					else
+					{
+						cout << *charPtr;
+					}
 					PC+=INSTRSIZE;
 				}
 				break;
@@ -340,7 +353,18 @@ int main(int argc, char* argv[])
 				PC+=INSTRSIZE;
 				break;
 			case 10:
-				reg[*(ptrPC+1)] = *(ptrData+(*(ptrPC+2)));
+				if (*(ptrData+(*(ptrPC+2))) == '\\')
+				{
+					char* charPtr = static_cast<char*>(static_cast<void*>(&reg[*(ptrPC+1)]));
+					int temp = beginData+((*(ptrPC+2))*INTSIZE);
+					*charPtr = mem[temp];
+					*(charPtr+1) = mem[temp+1];
+					// cout << *(charPtr+1) << endl;
+				}
+				else
+				{
+					reg[*(ptrPC+1)] = *(ptrData+(*(ptrPC+2)));
+				}
 				PC+=INSTRSIZE;
 				break;
 			case 13:
@@ -361,29 +385,4 @@ int main(int argc, char* argv[])
 				break;
 		}
 	}
-
-
-	// while(Running) 
-	// {
-	// 	switch(*PC) 
-	// 	{
-	// 		case ADD: 
-	// 			reg[instr[PC].opd1] =
-	// 				reg[instr[PC].opd1] + reg[instr[PC].opd2];
-	// 			PC++;
-	// 			break;
-
-	// 		case MOV:
-	// 			reg[instr[PC].opd1] = reg[instr[PC].opd2];
-	// 			PC++;
-	// 			break;
-
-	// 		case LDR:
-	// 			reg[instr[PC].opd1] = mem[instr[PC].opd2];
-	// 			PC++;
-	// 			break;
-	// 	}
-	// 	PC+=INSTRSIZE;
-	// }
-
 }
