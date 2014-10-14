@@ -24,8 +24,8 @@ TRP 3
 LDR R7 NAME10
 TRP 3
 ;2) Print a blank line.
-LDR R7 NEWLINE
-TRP 3
+;LDR R7 NEWLINE
+;TRP 3
 ;3) Add all the elements of list B together; print each result (intermediate and final) on screen.  Put 2 spaces between each result. <- pay attention to this (e.g., 450) <-pay attention to this
 LDR R0 B1
 LDR R1 B2
@@ -37,7 +37,7 @@ LDR R7 SPACE
 TRP 3 
 TRP 3
 LDR R1 B3
-ADD R0 R3
+ADD R0 R1
 MOV R7 R0
 TRP 1
 MOV R0 R7
@@ -45,7 +45,7 @@ LDR R7 SPACE
 TRP 3 
 TRP 3
 LDR R1 B4
-ADD R0 B4
+ADD R0 R1
 MOV R7 R0
 TRP 1
 MOV R0 R7
@@ -53,7 +53,7 @@ LDR R7 SPACE
 TRP 3 
 TRP 3
 LDR R1 B5
-ADD R0 B5
+ADD R0 R1
 MOV R7 R0
 TRP 1
 MOV R0 R7
@@ -61,13 +61,13 @@ LDR R7 SPACE
 TRP 3 
 TRP 3
 LDR R1 B6
-ADD R0 B6
+ADD R0 R1
 MOV R7 R0
 TRP 1
 MOV R3 R7
 ;4) Print a blank line. <- pay attention to this
-LDR R7 NEWLINE
-TRP 3
+;LDR R7 NEWLINE
+;TRP 3
 ;5) Multiply all the elements of list A together; print each result (intermediate and final) on screen. Put 2 spaces between each result. (e.g., 2)
 LDR R0 A1
 LDR R1 A2
@@ -108,8 +108,8 @@ MOV R7 R0
 TRP 1
 MOV R4 R7
 ;6) Print a blank line.
-LDR R7 NEWLINE
-TRP 3
+;LDR R7 NEWLINE
+;TRP 3
 ;7) Divide the final result from part 3, by each element in list B (the results are not cumulative). Put 2 spaces between each result. (e.g., 1)
 SUB R0 R0
 ADD R0 R3
@@ -163,8 +163,8 @@ DIV R0 R1
 MOV R7 R0
 TRP 1
 ;8) Print a blank line.
-LDR R7 NEWLINE
-TRP 3
+;LDR R7 NEWLINE
+;TRP 3
 ;9) Subtract from the final result of part 5 each element of list C (the results are not cumulative). Put 2 spaces between each result. (e.g., 220)
 SUB R0 R0
 ADD R0 R4
@@ -203,7 +203,7 @@ LDR R7 SPACE
 TRP 3
 TRP 3
 ; Data
-NEWLINE .BYT '\n'
+;NEWLINE .BYT '\n'
 SPACE .BYT ' '
 COMMA .BYT ','
 A1 .INT 1
@@ -223,7 +223,7 @@ C2 .INT 2
 C3 .INT 5
 C4 .INT 10
 NAME1 .BYT 'L'
-NAME2. BYT 'u'
+NAME2 .BYT 'u'
 NAME3 .BYT 'n'
 NAME4 .BYT 'd'
 NAME5 .BYT 'S'
@@ -232,3 +232,4 @@ NAME7 .BYT 'e'
 NAME8 .BYT 'n'
 NAME9 .BYT 'l'
 NAME10 .BYT 'i'
+TRP 0
